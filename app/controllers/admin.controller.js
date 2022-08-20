@@ -5,7 +5,7 @@ exports.create = (req, res) => {
   // Validate request
   if (!req.body.firstname) {
     return res.status(400).send({
-      message: "admin content can not be empty",
+      message: "create: admin content can not be empty",
     });
   }
 
@@ -98,7 +98,7 @@ exports.update = (req, res) => {
   // Validate Request
   if (!req.body.firstname) {
     return res.status(400).send({
-      message: "admin content can not be empty",
+      message: "update: admin content can not be empty",
     });
   }
 

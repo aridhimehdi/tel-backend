@@ -1,20 +1,16 @@
 const mongoose = require("mongoose");
 
-const FactureSchema = mongoose.Schema(
+const SimSchema = mongoose.Schema(
     {
         matricule: {
             type: String,
             required: true,
         },
-        prix: {
+        cin: {
             type: String,
             required: true,
         },
-        dates: {
-            type: String,
-            required: true,
-        },
-        datef: {
+        fullName: {
             type: String,
             required: true,
         },
@@ -22,10 +18,11 @@ const FactureSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        address:String
     },
     {
         timestamps: true,
     }
 );
 
-module.exports = mongoose.model("Facture", FactureSchema);
+module.exports = mongoose.model("Sim", SimSchema);

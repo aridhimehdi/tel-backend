@@ -1,25 +1,25 @@
-const Facture = require("../models/factures.model");
+const Sim = require("../models/sim.model");
 
-// Create and Save a new facture
+// Create and Save a new sim
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.matricule) {
         return res.status(400).send({
-            message: "facture content can not be empty",
+            message: "sim content can not be empty",
         });
     }
 
-    // Create a facture
-    const facture = new Facture({
+    // Create a sim
+    const sim = new Sim({
         matricule: req.body.matricule,
-        prix: req.body.prix,
-        dates: req.body.dates,
-        datef: req.body.datef,
+        cin: req.body.cin,
+        fullName: req.body.fullName,
         tel: req.body.tel,
+        address:req.body.address
     });
 
-    // Save facture in the database
-    facture
+    // Save sim in the database
+    sim
         .save()
         .then((data) => {
             res.send(data);
@@ -28,119 +28,119 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    "Some error occurred while creating the facture.",
+                    "Some error occurred while creating the sim.",
             });
         });
 };
 
-// Retrieve and return all facture from the database.
+// Retrieve and return all sim from the database.
 exports.findAll = (req, res) => {
-    Facture.find()
-        .then((factures) => {
-            res.send(factures);
+    Sim.find()
+        .then((sims) => {
+            res.send(sims);
         })
         .catch((err) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    "Some error occurred while retrieving factures.",
+                    "Some error occurred while retrieving sims.",
             });
         });
 };
 
-// Find a single facture with a factureId
+// Find a single sim with a simId
 exports.findOne = (req, res) => {
-    Facture.findById(req.params.factureId)
-        .then((facture) => {
-            if (!facture) {
+    Sim.findById(req.params.simId)
+        .then((sim) => {
+            if (!sim) {
                 return res.status(404).send({
                     message:
-                        "facture not found with id " + req.params.factureId,
+                        "sim not found with id " + req.params.simId,
                 });
             }
-            res.send(facture);
+            res.send(sim);
         })
         .catch((err) => {
             if (err.kind === "ObjectId") {
                 return res.status(404).send({
                     message:
-                        "facture not found with id " + req.params.factureId,
+                        "sim not found with id " + req.params.simId,
                 });
             }
             return res.status(500).send({
                 message:
-                    "Error retrieving facture with id " + req.params.factureId,
+                    "Error retrieving sim with id " + req.params.simId,
             });
         });
 };
 // login with credantials
 
-// Update a facture identified by the factureId in the request
+// Update a sim identified by the simId in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body.firstname) {
         return res.status(400).send({
-            message: "facture content can not be empty",
+            message: "sim content can not be empty",
         });
     }
 
-    // Find facture and update it with the request body
-    Facture.findByIdAndUpdate(
-        req.params.factureId,
+    // Find sim and update it with the request body
+    Sim.findByIdAndUpdate(
+        req.params.simId,
         {
             matricule: req.body.matricule,
-            prix: req.body.prix,
-            dates: req.body.dates,
-            datef: req.body.datef,
+            cin: req.body.cin,
+            fullName: req.body.fullName,
             tel: req.body.tel,
+            address:req.body.address
         },
         { new: true }
     )
-        .then((facture) => {
-            if (!facture) {
+        .then((sim) => {
+            if (!sim) {
                 return res.status(404).send({
                     message:
-                        "facture not found with id " + req.params.factureId,
+                        "sim not found with id " + req.params.simId,
                 });
             }
-            res.send(facture);
+            res.send(sim);
         })
         .catch((err) => {
             if (err.kind === "ObjectId") {
                 return res.status(404).send({
                     message:
-                        "facture not found with id " + req.params.factureId,
+                        "sim not found with id " + req.params.simId,
                 });
             }
             return res.status(500).send({
                 message:
-                    "Error updating facture with id " + req.params.factureId,
+                    "Error updating sim with id " + req.params.simId,
             });
         });
 };
 
-// Delete a facture with the specified factureId in the request
+// Delete a sim with the specified simId in the request
 exports.delete = (req, res) => {
-    Facture.findByIdAndRemove(req.params.factureId)
-        .then((facture) => {
-            if (!facture) {
+    Sim.findByIdAndRemove(req.params.simId)
+        .then((sim) => {
+            if (!sim) {
                 return res.status(404).send({
                     message:
-                        "facture not found with id " + req.params.factureId,
+                        "sim not found with id " + req.params.simId,
                 });
             }
-            res.send({ message: "facture deleted successfully!" });
+            res.send({ message: "sim deleted successfully!" });
         })
         .catch((err) => {
             if (err.kind === "ObjectId" || err.name === "NotFound") {
                 return res.status(404).send({
                     message:
-                        "facture not found with id " + req.params.factureId,
+                        "sim not found with id " + req.params.simId,
                 });
             }
             return res.status(500).send({
                 message:
-                    "Could not delete facture with id " + req.params.factureId,
+                    "Could not delete sim with id " + req.params.simId,
             });
         });
 };
