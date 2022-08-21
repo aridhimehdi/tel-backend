@@ -3,7 +3,7 @@ const Sim = require("../models/sim.model");
 // Create and Save a new sim
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.matricule) {
+    if (!req.body.matricule && !req.body.cin) {
         return res.status(400).send({
             message: "sim content can not be empty",
         });
@@ -78,7 +78,7 @@ exports.findOne = (req, res) => {
 // Update a sim identified by the simId in the request
 exports.update = (req, res) => {
     // Validate Request
-    if (!req.body.firstname) {
+    if (!req.body.fullName) {
         return res.status(400).send({
             message: "sim content can not be empty",
         });

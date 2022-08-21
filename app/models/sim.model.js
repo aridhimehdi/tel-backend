@@ -3,22 +3,25 @@ const mongoose = require("mongoose");
 const SimSchema = mongoose.Schema(
     {
         matricule: {
-            type: String,
-            required: true,
+            type: Number,
+            required: [true,"matv"],
         },
         cin: {
-            type: String,
-            required: true,
+            type: Number,
+            required: [true,"cinv"],
         },
         fullName: {
             type: String,
-            required: true,
+            required: [true,'fnV'],
         },
         tel: {
-            type: String,
-            required: true,
+            type: Number,
+            required: [true,"telv"],
         },
-        address:String
+        address:{
+            type:String,
+            required:[true,"addv"],
+        }
     },
     {
         timestamps: true,
