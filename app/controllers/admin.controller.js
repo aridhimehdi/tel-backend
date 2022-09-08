@@ -3,7 +3,7 @@ const Admin = require("../models/admin.model");
 // Create and Save a new admin
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.firstname) {
+  if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password) {
     return res.status(400).send({
       message: "create: admin content can not be empty",
     });
